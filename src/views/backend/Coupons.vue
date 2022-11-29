@@ -1,8 +1,10 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
+    <div class="d-flex justify-content-center">
+      <loading :active.sync="isLoading"></loading>
+    </div>
     <div class="text-end">
-      <button class="btn btn-primary mt-3" @click="openModal(true)">
+      <button class="btn btn-primary mt-3" @click="openModal(true)" v-if="!isLoading">
         建立新的優惠券
       </button>
     </div>

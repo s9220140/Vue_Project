@@ -3,15 +3,15 @@
         <div class="text-center">
             <loading :active.sync="isLoading"></loading>
         </div>
-        <div class="text-end mt-4">
+        <div class="text-end mt-4"  v-if="products.length > 0">
             <button class="btn btn-primary" @click="openModal">
                 建立新的產品
             </button>
         </div>
 
-        <Table :item="tempProduct" :products="products" @edit="openModal" @delete="delModal"></Table>
+        <Table :item="tempProduct" :products="products" @edit="openModal" @delete="delModal"  v-if="products.length > 0"></Table>
         <div class="d-flex justify-content-center">
-            <Pagination :pagination="pagination" @pageItem="getProducts"></Pagination>
+            <Pagination :pagination="pagination" @pageItem="getProducts"  v-if="products.length > 0"></Pagination>
         </div>
 
         <Modal :item="tempProduct" :is-new="isNew" :status="status" @update="updateProduct"></Modal>

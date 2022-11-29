@@ -6,7 +6,44 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "*",
-    redirect: "/login",
+    redirect: "/", //路徑錯誤時，自動導向首頁
+  },
+
+  {
+    path: "/",
+    component: () => import("@/views/frontend/Front"),
+    children: [
+      {
+        path: "/",
+        name: "Home",
+        component: () => import("@/views/frontend/Home"),
+      },
+      {
+        path: "/shop",
+        name: "Shop",
+        component: () => import("@/views/frontend/Shop"),
+      },
+      {
+        path: "/product/:id",
+        name: "product",
+        component: () => import("@/views/frontend/ProductPage"),
+      },
+      {
+        path: "/cart",
+        name: "Cart",
+        component: () => import("@/views/frontend/Cart"),
+      },
+      {
+        path: "/checkout",
+        name: "CheckOut",
+        component: () => import("@/views/frontend/Checkout"),
+      },
+      {
+        path: "/payorder/:orderId",
+        name: "PayOrder",
+        component: () => import("@/views/frontend/Payorder"),
+      },
+    ],
   },
 
   // 後端
@@ -36,8 +73,9 @@ const routes = [
     ],
   },
 
+  // 管理測試用
   {
-    path: "/",
+    path: "/user",
     name: "user",
     component: () => import("@/views/backend/Dashboard"),
     children: [

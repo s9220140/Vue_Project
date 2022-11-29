@@ -1,6 +1,8 @@
 <template>
     <div>
-        <loading :active.sync="isLoading"></loading>
+        <div class="d-flex justify-content-center">
+            <loading :active.sync="isLoading"></loading>
+        </div>
         <div class="row mt-3 g-4">
             <div class="col-lg-3 col-md-4 col-6" v-for="item in products" :key="item.id">
                 <Card :item="item" :status="status" @getItem="getProduct(item.id)" @addCart="addCart(item.id)"></Card>
@@ -11,11 +13,11 @@
         </div>
 
         <div class="my-5 row justify-content-center">
-            <div v-if="cart.carts.length === 0" class="default-page">
+            <!-- <div class="default-page">
                 <h2 class="text-center">購物車沒有商品</h2>
-            </div>
-            <div v-else class="cart-page">
-                <Table>
+            </div> -->
+            <div class="cart-page">
+                <Table v-show="cart.carts.length > 0">
                     <template v-slot:thead>
                         <tr>
                             <th width="20"></th>
@@ -59,7 +61,7 @@
                     </template>
                 </Table>
 
-                <div class="input-group mb-3 input-group-sm">
+                <div class="input-group mb-3 input-group-sm" v-show="cart.carts.length > 0">
                     <input type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼"
                         @keyup.enter="addCouponCode">
                     <div class="input-group-append">
@@ -243,7 +245,7 @@ export default {
             vm.$http.post(url, { data: order }).then(response => {
                 if (response.data.success) {
                     vm.$bus.$emit("msg-pop", response.data.message, "success");
-                    vm.$router.push(`/customer_checkout/${response.data.orderId}`);
+                    vm.$router.push(`/user/customer_checkout/${response.data.orderId}`);
                 }
                 vm.isLoading = false
             });

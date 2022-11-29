@@ -1,6 +1,9 @@
 <template>
-  <div v-show="orders.length > 0">
-    <Table>
+  <div>
+    <div class="d-flex justify-content-center">
+      <loading :active.sync="isLoading"></loading>
+    </div>
+    <Table v-show="orders.length > 0">
       <template v-slot:thead>
         <tr>
           <th>購買時間</th>
@@ -35,7 +38,7 @@
       <template v-slot:tfoot> </template>
     </Table>
     <div class="d-flex justify-content-center" v-show="orders.length > 0">
-      <Pagination :pagination="pagination" @pageItem="getOrders"></Pagination>
+      <Pagination :pagination="pagination" @pageItem="getOrders" v-show="orders.length > 0"></Pagination>
     </div>
 
     <Modal :item="tempOrder" :status="status" @update="updateOrder">
@@ -107,14 +110,17 @@ export default {
       status: {
         update: false,
       },
-      pagination: {}
+      pagination: {},
+      isLoading: false,
     };
   },
   methods: {
     getOrders() {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders`;
       const vm = this;
+      vm.isLoading = true
       vm.$http.get(api).then((response) => {
+        vm.isLoading = false
         vm.orders = response.data.orders;
         vm.pagination = response.data.pagination;
       });

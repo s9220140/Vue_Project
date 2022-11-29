@@ -1,5 +1,4 @@
 <template>
-    <div>
         <div class="table-responsive">
             <table class="table table-hover table-striped mt-4">
                 <thead>
@@ -48,7 +47,6 @@
                 </slot>
             </table>
         </div>
-    </div>
 </template>
 
 <script>

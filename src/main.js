@@ -11,6 +11,8 @@ import {
 } from "vee-validate";
 import TW from "vee-validate/dist/locale/zh_TW";
 import * as rules from "vee-validate/dist/rules";
+import 'bootstrap';
+
 
 import App from "./App.vue";
 import router from "./router";

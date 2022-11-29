@@ -8,7 +8,7 @@
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/admin/product"><i
+                        <router-link class="nav-link" to="/admin/products"><i
                                 class="fa-solid fa-table-list me-1"></i>產品列表
                         </router-link>
                     </li>
@@ -28,7 +28,7 @@
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/customer_order"><i
+                        <router-link class="nav-link" to="/user/customer_order"><i
                                 class="fa-solid fa-clipboard-list me-1"></i>模擬訂單</router-link>
                     </li>
                 </ul>

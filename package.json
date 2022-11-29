@@ -8,12 +8,14 @@
     "deploy": "npm run build && node ./deploy/ghpages.js"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.2",
     "core-js": "^3.8.3",
     "vee-validate": "^3.4.14",
     "vue": "^2.6.14",
     "vue-axios": "^3.5.1",
     "vue-loading-overlay": "3.0",
+    "vue-owl-carousel": "^2.0.3",
     "vue-router": "^3.5.1"
   },
   "devDependencies": {
