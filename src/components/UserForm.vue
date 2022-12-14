@@ -43,11 +43,12 @@
 
                 <div class="mb-3">
                     <label for="comment" class="form-label">留言</label>
-                    <textarea name="" id="comment" class="form-control" cols="30" rows="10"
-                        v-model="form.message" placeholder="可選填"></textarea>
+                    <textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.message"
+                        placeholder="可選填"></textarea>
                 </div>
                 <div class="text-end">
-                    <button class="btn btn-danger" :disabled="invalid">送出訂單</button>
+                    <button class="btn btn-danger" :disabled="invalid"> <i class="fas fa-spinner fa-spin me-1"
+                            v-if="status.send"></i>送出訂單</button>
                 </div>
             </form>
         </validation-observer>
@@ -57,6 +58,13 @@
 <script>
 export default {
     props: ['form'],
+    data() {
+        return {
+            status: {
+                send: false,
+            },
+        }
+    },
     methods: {
         createOrder() {
             this.$emit('send')

@@ -11,21 +11,53 @@
                         <router-link class="nav-link text-white" to="/shop">商店</router-link>
                     </ul>
                     <div class="inner">
-                        <button type="button" class="btn btn-outline-danger me-3 wishlist">
+                        <router-link class="btn btn-outline-danger me-3 wishlist" to="/favorite">
                             <i class="fas fa-2x fa-heart"></i>
-                            <span class="count">0</span>
-                        </button>
-
-                        <button type="button" class="btn btn-outline-info cart" @click="$router.push('/cart')">
+                            <span class="count" v-if="getWishLength">{{ getWishLength }}</span>
+                        </router-link>
+                        <router-link class="btn btn-outline-info cart" to="/cart">
                             <i class="fas fa-2x fa-shopping-cart"></i>
-                            <span class="count">0</span>
-                        </button>
+                            <span class="count" v-if="getCartLength">{{ getCartLength }}</span>
+                        </router-link>
                     </div>
                 </div>
             </div>
         </header>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            cartData: [],
+            wishData: [],
+        };
+    },
+    methods: {
+        getLocal() {
+            const vm = this
+            vm.cartData = JSON.parse(localStorage.getItem("cartData")) || [];
+            vm.wishData = JSON.parse(localStorage.getItem("wishData")) || [];
+        },
+    },
+    computed: {
+        getCartLength() {
+            const vm = this;
+            if (vm.cartData.length > 0) return vm.cartData.length;
+        },
+        getWishLength() {
+            const vm = this;
+            if (vm.wishData.length > 0) return vm.wishData.length;       
+        },
+    },
+    created() {
+        const vm = this
+        vm.getLocal()
+        vm.$bus.$on('local-pop', () => vm.getLocal())
+    },
+};
+</script>
 
 <style lang="scss" scoped>
 .wishlist,

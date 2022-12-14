@@ -14,11 +14,11 @@
         </div>
         <slot name="footer">
             <div class="card-footer d-flex">
-                <button type="button" class="btn btn-outline-secondary btn-sm" @click="getProduct(item.id)">
+                <button type="button" class="btn btn-outline-secondary btn-sm" @click="getProduct">
                     <i class="fas fa-spinner fa-spin me-1" v-show="status.info === item.id"></i>
                     查看更多
                 </button>
-                <button type="button" class="btn btn-outline-danger btn-sm ms-auto" @click="addCart(item.id)">
+                <button type="button" class="btn btn-outline-danger btn-sm ms-auto" @click="addCart">
                     <i class="fa-solid fa-sync fa-spin me-1" v-show="status.addCart === item.id"></i>
                     加到購物車
                 </button>

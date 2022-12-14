@@ -36,7 +36,7 @@
               </tr>
             </tfoot>
           </table>
-  
+
           <table class="table">
             <tbody>
               <tr>
@@ -84,7 +84,8 @@ export default {
         user: {}
       },
       orderId: "",
-      isLoading: false
+      isLoading: false,
+      cartData: JSON.parse(localStorage.getItem('cartData')) || [], // localStorage data
     };
   },
   methods: {
@@ -93,6 +94,7 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
       vm.isLoading = true;
       vm.$http.get(url).then(response => {
+        console.log(response);
         vm.order = response.data.order;
         vm.isLoading = false;
       });
@@ -100,13 +102,16 @@ export default {
     payOrder() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
-      vm.isLoading = true;
+      // vm.isLoading = true;
       vm.$http.post(url).then(response => {
         console.log(response);
         if (response.data.success) {
           vm.$bus.$emit("msg-pop", response.data.message, "success");
+          vm.cartData = []
+          localStorage.setItem('cartData', JSON.stringify(vm.cartData))
+          vm.$bus.$emit("local-pop");
           vm.getOrder();
-          vm.isLoading = false;
+          // vm.isLoading = false;
         }
       });
     },
